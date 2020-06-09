@@ -7,14 +7,14 @@ alert, confirm, console, prompt
 
 function printReduceText(text) {
     if (typeof(text)!=='string') {
-        console.log('Это не строка: ', text);
+        return 'Это не строка: ' + text;
     } else {
         text = text.trim();
         if (text.length > 30) {
             text = text.substring(0,30) + '...';
         }
-        console.log('text: ', text);
+        return text;
     }
 }
-printReduceText('                     printReduceText        ');
-printReduceText('                     printReduceText printReduceText printReduceText        ');
+console.log(printReduceText('                     printReduceText        '));
+console.log (printReduceText('                     printReduceText printReduceText printReduceText        '));
