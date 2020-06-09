@@ -1,4 +1,5 @@
 'use strict';
+/* jshint -W097 */
 
 /*global
 alert, confirm, console, prompt
