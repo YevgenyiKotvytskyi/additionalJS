@@ -12,6 +12,7 @@ alert, confirm, console, prompt
     for (let i = 1; i < 8; i++) {
         arr[i - 1] = i * 123;
     }
+    console.log('arr: ', arr);
 
     let firstFigure;
 
