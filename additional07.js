@@ -13,8 +13,6 @@ let
     currentDay = new Date().getDay(),
     body = document.querySelector('body');
 
-
-
 const htmlWeekList = function () {
     let text = '<ul>';
     let style = '';
@@ -23,7 +21,6 @@ const htmlWeekList = function () {
         style += (count == currentDay - 1) ? 'font-weight:bold' : '';
         text += `<li style = "${style}" >${weekDays[count]}</li>`;
         console.log('%c' + weekDays[count], style);
-
     }
     return text + '</ul>';
 };
