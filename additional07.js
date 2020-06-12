@@ -9,7 +9,7 @@ alert, confirm, console, prompt
 
 const weekDays = ['понедельник', 'вторник', 'среда', 'четверг', 'пятница', 'суббота', 'воскресенье'];
 
-let 
+let
     currentDay = new Date().getDay(),
     body = document.querySelector('body');
 
@@ -17,17 +17,15 @@ let
 
 const htmlWeekList = function () {
     let text = '<ul>';
-    let style ='';
+    let style = '';
     for (const count in weekDays) {
-        style = ( count > 4 ) ? 'font-style: italic;' : '';
-        style += ( count == currentDay - 1 ) ? 'font-weight:bold' : '' ;
-        text += `<li style = "${style}" >${weekDays[count]}</li>`; 
-        console.log('%c' + weekDays[count],style);
+        style = (count > 4) ? 'font-style: italic;' : '';
+        style += (count == currentDay - 1) ? 'font-weight:bold' : '';
+        text += `<li style = "${style}" >${weekDays[count]}</li>`;
+        console.log('%c' + weekDays[count], style);
 
     }
     return text + '</ul>';
 };
 
 body.innerHTML += htmlWeekList();
-
-
