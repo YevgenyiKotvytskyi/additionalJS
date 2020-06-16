@@ -47,7 +47,7 @@ function curentTime() {
         = dateTimeFormat .formatToParts(date); 
         
         return`Текущее время: ${day}.${month}.${year} ${hour}:${minute}:${second} `;
-    };
+}
     
 setInterval(() => {
     para.innerHTML =  curentTime();
