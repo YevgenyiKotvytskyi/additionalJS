@@ -44,9 +44,11 @@ let
 
         readList() {
             const todo = JSON.parse(localStorage.getItem(this.key));
-            for (const property in this.todo) {
-                if (Array.isArray(todo[property])) {
-                    this.todo[property] = todo[property];
+            if (todo) {
+                for (const property in this.todo) {
+                    if (Array.isArray(todo[property])) {
+                        this.todo[property] = todo[property];
+                    }
                 }
             }
         },
