@@ -1,4 +1,10 @@
-const filterByType = (type, ...values) => values.filter(value => typeof value === type),
+//const filterByType = (type, ...values) => values.filter(value => typeof value === type),
+
+const filterByType = (type, value) => {
+	return Function(` 
+	const filterByType = (type, ...values) => values.filter(value => typeof value === type);
+	return (filterByType('${type}', ${value}))`)();
+  },
 
 	hideAllResponseBlocks = () => {
 		const responseBlocksArray = Array.from(document.querySelectorAll('div.dialog__response-block'));
@@ -21,7 +27,7 @@ const filterByType = (type, ...values) => values.filter(value => typeof value ==
 
 	tryFilterByType = (type, values) => {
 		try {
-			const valuesArray = eval(`filterByType('${type}', ${values})`).join(", ");
+			const valuesArray = filterByType(type, values).join(", ");
 			const alertMsg = (valuesArray.length) ?
 				`Данные с типом ${type}: ${valuesArray}` :
 				`Отсутствуют данные типа ${type}`;
