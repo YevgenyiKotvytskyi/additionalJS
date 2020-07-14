@@ -13,14 +13,28 @@
 
 <body>
 
-<select id="cars">
-    <option value="no">Выберите тачку</option>
-    <option value="bmw">bmw</option>
-    <option value="volvo">volvo</option>
-</select>
+<form id="request">
+    <legend><h2>Yandex перевод</h2></legend>
+    <div>
+        <p>
+            <label for="origin">Исходный текст</label></p>
+        <p>
+            <textarea type="text" cols="40" rows="5" id="origin"></textarea>
+        </p>
 
-<div id="output">
-    выбери тачку
+    </div>
+    <p>
+        Направление перевода
+        <select id="direction" >
+            <option value="en-ru">en-ru</option>
+            <option value="ru-en">ru-en</option>
+        </select>
+    </p>
+    <button type="submit"> <strong> Перевести </strong> </button>
+    <br><br>
+<div>
+    <p>Результат:</p>
+    <textarea type="text" cols="40" rows="5" id="answer"></textarea>
 </div>
 
 

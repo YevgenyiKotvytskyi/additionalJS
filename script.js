@@ -1,51 +1,50 @@
 document.addEventListener('DOMContentLoaded', () => {
     'use strict';
 
-    const select = document.getElementById('cars'),
-        output = document.getElementById('output');
-    
-    const showData = (responseText) => {
-        const data = JSON.parse(responseText);
-        data.cars.forEach(item => {
-            if (item.brand === select.value) {
-                const {brand, model, price} = item;
-                output.innerHTML = `Тачка ${brand} ${model} <br>
-                Цена: ${price}$`;
-            }
-        });
-    };
+    const requestForm = document.getElementById('request'),
+        answer = document.getElementById('answer'),
+        originText = document.getElementById('origin'),
+        direction = document.getElementById('direction');
+   
 
-    const errorMessage = (error) => {
-        output.innerHTML = 'Произошла ошибка';
-        console.error(error);
-    };
+    const showResult = (text, color = '') => {
+        answer.value = text;
+        answer.style.color = color;
+    }
 
-    const getData = () => 
-        new Promise ( (resolve, reject) => {
-            const request = new XMLHttpRequest();
-            request.open('GET', './cars.json');
-            request.setRequestHeader('Content-type', 'application/json');
-            request.send();
-            request.addEventListener('readystatechange', () => {
-                if (request.readyState !== 4) {
-                    return;
+
+    const pageUrl = '/api/v1.5/tr.json/translate',
+        hostUrl='translate.yandex.net',
+        API_KEY = 'trnsl.1.1.20190704T212630Z.c409bb9604ae7251.df09dbd89372575b02298ed0970f8e45c749648b';
+
+    requestForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const lang = direction.options[direction.selectedIndex].value,
+            text = originText.value.trim();
+        if (text) {
+            const urlText = encodeURIComponent(text);
+
+            fetch(`https://${hostUrl}${pageUrl}?key=${API_KEY}&text=${urlText}&lang=${lang}`,
+            {
+                method: 'GET',
+                mode: 'cors',
+                cache: 'default',
+            })
+            .then( response => {
+                if (response.status !== 200) {
+                    throw new Error('Status network 200!');
                 }
-                if (request.status === 200) {
-                    resolve(request.responseText);
-                } else {
-                    reject(request.status);
-                }
+                return(response.json());
+            })
+            .then ( data => {
+                showResult(data.text[0], 'green');
+            })
+            .catch(error => {
+                console.error(error);
             });
-        });
-
-
-
-    select.addEventListener('change', (e) => {
-
-        getData()
-            .then(showData)
-            .catch(errorMessage);
-
+        } else {
+            showResult('Введите текст для перевода!', 'red');
+        }
     });
 
 });
